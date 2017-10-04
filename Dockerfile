@@ -62,7 +62,7 @@ RUN echo "export CERESDIR=/home/icuser/CERES" >> /home/icuser/.bashrc
 RUN echo "export CERESDEVDIR=/home/icuser/CERES_dev" >> /home/icuser/.bashrc
 
 RUN pip install pytest
-ADD tests.py /home/icuser/tests/tests.py
+ADD tests /home/icuser/tests/
 
 USER root
 CMD /startup.sh; su icuser; /bin/bash
