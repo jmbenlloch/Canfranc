@@ -1,0 +1,21 @@
+language: generic
+sudo:     true
+
+matrix:
+  fast_finish: true
+
+os:
+  - linux
+
+services:
+  - docker
+
+before_install:
+  - docker build -t canfranc .
+  - docker run --privileged -h canfranc -ti canfranc
+  - docker ps -a
+  - docker run carlad/sinatra /bin/sh -c "cd /root/sinatra; bundle exec rake test"
+
+script:
+  - CONTAINER=`docker ps | grep canfranc | awk '{print $1}'`
+  - docker exec -ti $CONTAINER /home/icuser/execute_tests.sh
