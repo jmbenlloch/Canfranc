@@ -62,7 +62,12 @@ RUN echo "export CERESDIR=/home/icuser/CERES" >> /home/icuser/.bashrc
 RUN echo "export CERESDEVDIR=/home/icuser/CERES_dev" >> /home/icuser/.bashrc
 
 RUN pip install pytest
-ADD tests /home/icuser/tests/
+ADD tests /home/icuser/tests
+#ADD execute_tests.sh /home/icuser/
+RUN echo "#!/bin/bash" > /home/icuser/execute_tests.sh
+RUN grep export .bashrc >> /home/icuser/execute_tests.sh
+RUN echo pytest -v /home/icuser/tests/tests.py >> /home/icuser/execute_tests.sh
+RUN chmod +x /home/icuser/execute_tests.sh
 
 USER root
 CMD /startup.sh; su icuser; /bin/bash
