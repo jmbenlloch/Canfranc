@@ -11,8 +11,8 @@ services:
   - docker
 
 before_install:
-  - CONTAINTER=`docker run --privileged -h canfranc -td jmbenlloch/canfranc`
-  - echo $CONTAINER
+  - docker run --privileged -h canfranc -td jmbenlloch/canfranc
 
 script:
+  - CONTAINER=`docker ps | grep canfranc | awk '{print $1}'`
   - docker exec -ti $CONTAINER /home/icuser/execute_tests.sh
