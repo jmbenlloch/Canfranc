@@ -70,4 +70,5 @@ RUN echo pytest -v /home/icuser/tests/tests.py >> /home/icuser/execute_tests.sh
 RUN chmod +x /home/icuser/execute_tests.sh
 
 USER root
+
 CMD /startup.sh; su icuser; /bin/bash
